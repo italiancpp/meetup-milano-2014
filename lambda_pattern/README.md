@@ -1,5 +1,5 @@
-Lambda Patterns & Idioms
-========================
+Lambda Recipes
+==============
 
 Code used to build some examples of talk
 
@@ -8,12 +8,11 @@ Topics (unstable)
 -----------------
 
 * Lambda introduction
-* Lamda as predicate (in stl containers)
-* Lamda as deleter function for shared\_ptr
+* Lambda as predicate (in stl containers)
+* Lambda as deleter function for shared\_ptr
 * Assign const value using Lambda
 * RAII + Lambda: ScopedGuard
-* Lambda in a **while** condition
-* Unrolling stack pattern
+* Lambda in a **while** condition (ex.: unrolling stack pattern)
 
 
 Biblio
