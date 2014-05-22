@@ -4,17 +4,6 @@ Lambda Recipes
 Code used to build some examples of talk
 
 
-Topics (unstable)
------------------
-
-* Lambda introduction
-* Lambda as predicate (in stl containers)
-* Lambda as deleter function for shared\_ptr
-* Assign const value using Lambda
-* RAII + Lambda: ScopedGuard
-* Lambda in a **while** condition (ex.: unrolling stack pattern)
-
-
 Biblio
 ------
 
