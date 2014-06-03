@@ -71,6 +71,11 @@ void unit_03()
 /*
     In C++11 we can simplify our problems using lambda and variadic template
 */
+template <typename F>
+void glue(F f)
+{
+    f();
+}
 
 template <typename F, typename ...Funs>
 void glue(F f, Funs ...funs)
@@ -79,18 +84,13 @@ void glue(F f, Funs ...funs)
         glue(forward<Funs>(funs)...);
 }
 
-template <typename F>
-void glue(F f)
-{
-    f();
-}
 
 void unit_11()
 {
     bool b; int d;
 
     // we define a lamda function as base block of computation
-    auto f = [&](string k) {
+    auto f = [&](string k) -> bool {
         // look for data
         b = getData(k, d);
         if (!b)
