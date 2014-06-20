@@ -85,13 +85,4 @@ int main()
     unroll_stack(s, mutex(), [](auto e){ cout << e << " "; });
     cout << endl;
     // output: 3 2 1
-
-    //combine those things
-    vector<int> w;
-    // fill a stack
-    s.push(1); s.push(2); s.push(3);
-    //push it into vector w
-    unroll_stack(s, mutex(), [&w](auto e){ w.push_back(e); });
-    print_comma(w);
-    //output: 3, 2, 1
 }

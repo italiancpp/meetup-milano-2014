@@ -18,7 +18,7 @@ bool getData(string k, int& d) {
     cout << "calling for key: " << k << endl;
     const map<string, bool> m {
         make_pair ("fiat", true),
-        make_pair ("bmw", true),
+        make_pair ("bmw", false),
         make_pair ("mercedes", false)
     };
     
@@ -72,27 +72,25 @@ void unit_03()
     In C++11 we can simplify our problems using lambda and variadic template
 */
 template <typename F>
-void glue(F f)
+void run_if(F f)
 {
     f();
 }
 
 template <typename F, typename ...Funs>
-void glue(F f, Funs ...funs)
+void run_if(F f, Funs ...funs)
 {
     if (f())
-        glue(forward<Funs>(funs)...);
+        run_if(forward<Funs>(funs)...);
 }
 
 
 void unit_11()
 {
-    bool b; int d;
-
     // we define a lamda function as base block of computation
     auto f = [&](string k) -> bool {
         // look for data
-        b = getData(k, d);
+        int d; auto b = getData(k, d);
         if (!b)
         {
             // if no value is present stop!
@@ -106,9 +104,11 @@ void unit_11()
         }
     };
 
+
     // Now we use a "glue" function. This function take an arbitrary numbers of lambda and execute it.
-    // For every function we check the result of execution and if its true we continue to execute the chain of lambda.
-    glue(
+    // For every function we check the result of execution and if it's true we continue to execute the chain of lambda.
+
+    run_if(
         [&] { return f("fiat"); },
         [&] { return f("bmw"); },
         [&] { return f("mercedes"); }
