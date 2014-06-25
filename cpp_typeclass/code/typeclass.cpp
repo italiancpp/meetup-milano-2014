@@ -11,17 +11,20 @@
 template <typename T>
 struct Show
 {
-    static std::string show(T const &);
-    static std::string showList(std::list<T> const &);
+    struct interface
+    {
+        static std::string show(T const &);
+        static std::string showList(std::list<T> const &);
+    };
 
     using type = typeclass
                  <
-                   decltype(show),
-                   decltype(showList)
+                   decltype(interface::show),
+                   decltype(interface::showList)
                  >;
 
-    has_function_(show, Show, T);
-    has_function_(showList, Show, T);
+    has_function_(show, Show);
+    has_function_(showList, Show);
 };
 
 
@@ -77,6 +80,7 @@ int
 main(int, char *[])
 {
      static_assert(ShowInstance<Test>(), "Show instance error");
+     static_assert(!ShowInstance<int>(), "Show internal error");
 
      std::cout << show(Test{}) << std::endl;
      std::cout << showList(std::list<Test>{}) << std::endl;
