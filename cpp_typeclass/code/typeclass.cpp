@@ -49,7 +49,7 @@ std::string showList(std::list<Test> const &)
 }
 
 
-//// ensure the interface is correct:
+///////////////// Instance declaration
 
 
 using Show_Test_instance =
@@ -60,6 +60,17 @@ using Show_Test_instance =
         decltype(showList),
         decltype(show)
     >;
+
+
+///////////////// Constraint with Concept Lite:
+
+#if 0
+template <ShowInstance T>
+void print(const T &type)
+{
+    std::cout << show (type) << std::endl;
+}
+#endif
 
 
 int
