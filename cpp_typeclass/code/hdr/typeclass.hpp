@@ -25,18 +25,19 @@ struct is_instance_of : std::integral_constant<bool, true>
     using type = typename Cl<Ty>::type;
 };
 
-#define has_function_(fun) \
-template <typename Ty> \
+
+#define has_function_(fun, _class, _type) \
+template <typename __Type> \
 struct has_function_ ## fun \
 { \
     using yes = char[1]; \
     using no  = char[2]; \
     \
-    template <typename V, V value> struct type_check; \
-    template <typename U> static yes& sfinae(type_check<typename std::decay<decltype(fun)>::type, fun> *); \
-    template <typename U> static no&  sfinae(...); \
+    template <typename __Fun, __Fun value> struct type_check; \
+    template <typename __Type2> static yes& check(type_check<typename std::decay<decltype(_class<_type>::fun)>::type, fun> *); \
+    template <typename __Type2> static no&  check(...); \
     \
-    static constexpr bool value = sizeof(sfinae<Ty>(0)) == sizeof(yes); \
+    static constexpr bool value = sizeof(check<__Type>(0)) == sizeof(yes); \
 };
 
 

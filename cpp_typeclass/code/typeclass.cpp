@@ -20,8 +20,8 @@ struct Show
                    decltype(showList)
                  >;
 
-    has_function_(show);
-    has_function_(showList);
+    has_function_(show, Show, T);
+    has_function_(showList, Show, T);
 };
 
 
@@ -57,8 +57,8 @@ using Show_Test_instance =
     typeclass_instance
     <
         Show, Test,
-        decltype(showList),
-        decltype(show)
+        decltype(show),
+        decltype(showList)
     >;
 
 
