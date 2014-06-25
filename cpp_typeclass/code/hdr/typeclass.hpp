@@ -19,12 +19,6 @@ struct __typeclass_instance
 template <template <typename> class Cl, typename Ty, typename ...Fs>
 using typeclass_instance = typename __typeclass_instance<Cl, Ty, Fs...>::type;
 
-template <template <typename> class Cl, typename Ty, typename ...Fs>
-struct is_instance_of : std::integral_constant<bool, true>
-{
-    using type = typename Cl<Ty>::type;
-};
-
 
 #define has_function_(fun, _class, _type) \
 template <typename __Type> \
