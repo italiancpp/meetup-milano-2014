@@ -33,7 +33,7 @@ struct has_function_ ## fun \
     using no  = char[2]; \
     \
     template <typename V, V value> struct type_check; \
-    template <typename U> static yes& sfinae(type_check<decltype(fun),&fun> *); \
+    template <typename U> static yes& sfinae(type_check<typename std::decay<decltype(fun)>::type, fun> *); \
     template <typename U> static no&  sfinae(...); \
     \
     static constexpr bool value = sizeof(sfinae<Ty>(0)) == sizeof(yes); \
