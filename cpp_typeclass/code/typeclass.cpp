@@ -11,28 +11,30 @@
 template <typename T>
 struct Show
 {
-    struct interface
-    {
-        static std::string show(T const &);
-        static std::string showList(std::list<T> const &);
-    };
+    static std::string show(T const &);
+    static std::string showList(std::list<T> const &);
 
     using type = typeclass
                  <
-                   decltype(interface::show),
-                   decltype(interface::showList)
+                   decltype(show),
+                   decltype(showList)
                  >;
+};
 
+
+namespace details
+{
     has_function_(show, Show);
     has_function_(showList, Show);
-};
+}
 
 
 template <typename Ty>
 constexpr bool ShowInstance()
 {
-    return  Show<Ty>::template has_function_show<Ty>::value &&
-            Show<Ty>::template has_function_showList<std::list<Ty>>::value;
+    return  global_instance<Show,Ty>::type::size != 0 &&
+            details::has_function_show<Ty>::value &&
+            details::has_function_showList<std::list<Ty>>::value;
 };
 
 
@@ -43,26 +45,30 @@ struct Test { };
 
 std::string show(Test const &)
 {
-    return "test";
+    return "Test";
 }
 
 std::string showList(std::list<Test> const &)
 {
-    return "[test]";
+    return "[Test]";
 }
 
 
 ///////////////// Instance declaration
 
 
-using Show_Test_instance =
+template <>
+struct global_instance<Show, Test>
+{
+    using type =
 
-    typeclass_instance
-    <
-        Show, Test,
-        decltype(show),
-        decltype(showList)
-    >;
+        typeclass_instance
+        <
+            Show, Test,
+            decltype(show),
+            decltype(showList)
+        >;
+};
 
 
 ///////////////// Constraint with Concept Lite:
