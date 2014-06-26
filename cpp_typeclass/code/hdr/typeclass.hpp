@@ -24,6 +24,12 @@ template <template <typename> class Class, typename Ty, typename ...Fs>
 using typeclass_instance = typename __typeclass_instance<Class, Ty, Fs...>::type;
 
 
+template <template <typename> class C, typename T> struct global_instance
+{
+    using type = typeclass<>;
+};
+
+
 #define has_function_(fun, _class) \
 template <typename __Type> \
 struct has_function_ ## fun \
