@@ -24,8 +24,8 @@ struct Show
 
 namespace details
 {
-    has_function_(show, Show);
-    has_function_(showList, Show);
+    has_function_(show);
+    has_function_(showList);
 }
 
 

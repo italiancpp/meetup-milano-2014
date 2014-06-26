@@ -30,7 +30,7 @@ template <template <typename> class C, typename T> struct global_instance
 };
 
 
-#define has_function_(fun, _class) \
+#define has_function_(fun) \
 template <typename __Type> \
 struct has_function_ ## fun \
 { \
