@@ -3,7 +3,7 @@
 #include <list>
 #include <string>
 
-#include "type-multiset.hpp"
+#include "multiset.hpp"
 
 template <typename ...Fs>
 using typeclass = type::multiset<Fs...>;
@@ -13,10 +13,12 @@ struct __typeclass_instance
 {
     static_assert( !(sizeof...(Fs) <  Class<Ty>::type::size ), "instance declaration: incomplete interface");
     static_assert( !(sizeof...(Fs) >  Class<Ty>::type::size ), "instance declaration: too many method");
+
     static_assert( type::equal_set< type::multiset<Fs...>, typename Class<Ty>::type >(), "instance declaration: function(s) mismatch");
 
     using type = typeclass<Fs...>;
 };
+
 
 template <template <typename> class Class, typename Ty, typename ...Fs>
 using typeclass_instance = typename __typeclass_instance<Class, Ty, Fs...>::type;
