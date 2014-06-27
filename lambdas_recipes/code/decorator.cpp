@@ -7,11 +7,8 @@
 #include <chrono>
 #include <thread>
 #include <future>
-
 #include <mutex>
 #include "helper.hpp"
-
-#include <boost/shared_ptr.hpp>
 
 
 using namespace std;
