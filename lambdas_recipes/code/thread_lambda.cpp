@@ -10,9 +10,6 @@
 #include <mutex>
 #include "helper.hpp"
 
-#include <boost/shared_ptr.hpp>
-
-
 using namespace std;
 
 
@@ -59,11 +56,7 @@ public:
         just_lock(m_, [&]{ funs.push_back(forward<F>(f)); });
     }
     
-    ~Worker()
-    {
-        stop();
-        wth.join();
-    }
+    ~Worker() { stop(); wth.join(); }
 
     Worker(const Worker& w) =delete;
     Worker& operator=(const Worker& w) =delete;
@@ -81,8 +74,8 @@ class Logger
 public:
     Logger() : wth{} {}
 
-    void info(string msg)  { wth.send_log([msg]{ cout << "[ INFO  ] "  <<  msg << endl; }); }
-    void debug(string msg) { wth.send_log([msg]{ cout << "[ DEBUG ] "  <<  msg << endl; }); }
+    void info(string msg)  { wth.send_log([=]{ cout << "[ INFO  ] "  <<  msg << endl; }); }
+    void debug(string msg) { wth.send_log([=]{ cout << "[ DEBUG ] "  <<  msg << endl; }); }
 
     ~Logger() { wth.stop(); }
 
