@@ -183,9 +183,6 @@ behavior mainActor(event_based_actor *self)
 
 int main(int argc, char const *argv[])
 {
-	// // announce<milliseconds>();
-	// scoped_actor self;
-
 	auto main = spawn(mainActor);
 	await_all_actors_done();
 
