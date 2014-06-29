@@ -32,7 +32,8 @@ namespace details
 template <typename Ty>
 constexpr bool ShowInstance()
 {
-    return  global_instance<Show,Ty>::type::size != 0 &&
+    return  type::equal_set< typename typeclass_instance<Show,Ty>::type, typename Show<Ty>::type>() &&
+
             details::has_function_show<Ty>::value &&
             details::has_function_showList<std::list<Ty>>::value;
 };
@@ -58,13 +59,12 @@ std::string showList(std::list<Test> const &)
 
 
 template <>
-struct global_instance<Show, Test>
+struct typeclass_instance<Show, Test>
 {
     using type =
 
-        typeclass_instance
+        typeclass
         <
-            Show, Test,
             decltype(show),
             decltype(showList)
         >;
