@@ -4,4 +4,4 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -Wall -Wextra -std=c++1y")
 
 include_directories(hdr)
 
-add_executable(example example.cpp)
+add_executable(typeclass-example typeclass-example.cpp)

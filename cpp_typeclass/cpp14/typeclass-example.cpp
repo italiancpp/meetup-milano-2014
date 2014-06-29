@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 
-#include "typeclass.hpp"
+#include <typeclass.hpp>
 
 
 ///////////////// Show typeclass
